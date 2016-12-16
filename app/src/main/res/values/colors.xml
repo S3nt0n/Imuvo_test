@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBackgroundRetangle">#FFC000</color>
+    <color name="colorBackgroundButtons">#5B9BD5</color>
+    <color name="textcolorinbubble">#FFFFFF</color>
+    <color name="colorBackgroundRetangleBlue">#5B9BD5</color>
+    <color name="colorButtonBorder">#41719C</color>
+    <color name="colorButtoPressed">#4B0082</color>
+
+</resources>

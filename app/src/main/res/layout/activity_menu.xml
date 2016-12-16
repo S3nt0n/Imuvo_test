@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.example.sco.imuvo.Activities.Menu">
+
+
+    <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
+        android:text="test"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:id="@+id/bubbleText"
+        android:background="@drawable/speechbubblebottom3"/>
+
+    <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                app:srcCompat="@drawable/animal"
+                android:id="@+id/imageView"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:text="Spielen"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/play"
+            android:onClick="onClickPlay"
+            android:layout_weight="1"
+            android:gravity="center_horizontal" />
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:text="Lesen"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/read"
+            android:onClick="onClickRead"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            />
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:text="Vokabeln"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/vocabs"
+            android:layout_weight="1"
+            android:onClick="onClickVocabs"
+            android:gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:text="Vorlesen"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/readAloud"
+            android:onClick="onClickReadAloud"
+            android:layout_weight="1"
+            android:gravity="center_horizontal" />
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:text="Test"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/test"
+            android:onClick="onClickTest"
+            android:gravity="center_horizontal" />
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:text="Aufgaben"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/task"
+            android:onClick="onClickTask"
+            android:gravity="center_horizontal" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
