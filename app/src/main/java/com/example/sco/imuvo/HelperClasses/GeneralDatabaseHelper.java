@@ -17,11 +17,11 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
     private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS user_imuvo "
             + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT, password TEXT)";
 
-    private static final String VOCAB_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocab_imuvo " +
-            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, foreign TEXT, speech BLOB, lection INTEGER)\"";
+    private static final String VOCAB_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo " +
+            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, speech BLOB, lection INTEGER)";
 
     private static final String LECTION_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS lection_imuvo " +
-            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, number INTEGER, language TEXT)\"";
+            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, number INTEGER, language TEXT)";
     private static final String USER_DROP_Table = "DROP TABLE IF EXISTS user_imuvo";
 
     private String DB_PATH = null;
@@ -42,11 +42,11 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if(checkDataBase() == false){
+
             db.execSQL(USER_CREATE_TABLE);
             db.execSQL(VOCAB_CREATE_TABLE);
             db.execSQL(LECTION_CREATE_TABLE);
-        }
+
 
     }
 
@@ -72,7 +72,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    private boolean checkDataBase() {
+    public boolean checkDataBase() {
 
         SQLiteDatabase checkDB = null;
         try {
@@ -88,5 +88,10 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
         }
 
         return checkDB != null ? true : false;
+    }
+
+    public void dropDatabase(Context context){
+        context.deleteDatabase(DB_NAME);
+
     }
 }

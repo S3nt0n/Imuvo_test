@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper;
+import com.example.sco.imuvo.HelperClasses.InitData;
 import com.example.sco.imuvo.HelperClasses.UserDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.Helper;
 import com.example.sco.imuvo.R;
@@ -32,8 +34,12 @@ public class LogIn extends AppCompatActivity {
         getElements();
         testFunction();
         setInitData();
-        userDatabaseHelper = UserDatabaseHelper.getInstance(this);
-        userDatabaseHelper.Create();
+        initSQLData();
+
+    }
+
+    private void initSQLData() {
+        InitData.initSQLData(this);
     }
 
     private void setInitData() {
@@ -53,7 +59,7 @@ public class LogIn extends AppCompatActivity {
         nameEditText = (EditText) findViewById(R.id.name);
         passwordEditText = (EditText) findViewById(R.id.password);
         bubbleTextView = (TextView) findViewById(R.id.bubbleTextLogIn);
-
+        userDatabaseHelper = UserDatabaseHelper.getInstance(this);
     }
 
     public void onClickStart(View v){
@@ -92,7 +98,6 @@ public class LogIn extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         switch (item.getItemId()) {
             case R.id.create_new:
                 newUser();

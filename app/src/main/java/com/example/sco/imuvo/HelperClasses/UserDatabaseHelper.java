@@ -36,9 +36,9 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if(checkDataBase() == false){
+
             db.execSQL(USER_CREATE_TABLE);
-        }
+
 
     }
 
@@ -91,6 +91,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
 
     public long insert(User user) {
         open();
+        db.execSQL(USER_CREATE_TABLE);
         ContentValues values = new ContentValues();
         values.put("username", user.getUserName());
         values.put("password", user.getPassword());

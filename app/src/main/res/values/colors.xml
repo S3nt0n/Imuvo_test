@@ -9,5 +9,7 @@
     <color name="colorBackgroundRetangleBlue">#5B9BD5</color>
     <color name="colorButtonBorder">#41719C</color>
     <color name="colorButtoPressed">#4B0082</color>
-
+    <color name="colorButtonMenu">#FFFFFF</color>
+    <color name="colorMenuButtonBorder">#41719C</color>
+    <color name="colorMenuButtonPressed">#5B9BD5</color>
 </resources>

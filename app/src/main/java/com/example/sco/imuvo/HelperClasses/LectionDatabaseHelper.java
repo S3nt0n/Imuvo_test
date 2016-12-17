@@ -44,9 +44,9 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if(checkDataBase() == false){
+
             db.execSQL(LECTION_CREATE_TABLE);
-        }
+
     }
 
     @Override
@@ -98,6 +98,7 @@ public class LectionDatabaseHelper extends SQLiteOpenHelper {
 
     public long insert(Lection Lection) {
         open();
+        db.execSQL(LECTION_CREATE_TABLE);
         ContentValues values = new ContentValues();
         values.put("number", Lection.getNumber());
         values.put("language", Lection.getLanguage());

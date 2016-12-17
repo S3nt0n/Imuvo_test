@@ -120,6 +120,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
 
     public long insert(Vocab vocab) {
         open();
+        db.execSQL(USER_CREATE_TABLE);
         ContentValues values = new ContentValues();
         values.put("german",vocab.getGerman());
         values.put("translation",vocab.getForeign());

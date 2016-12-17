@@ -3,6 +3,6 @@
     <item android:id="@+id/create_new"
         android:title="Nutzer registrieren" />
     <item android:id="@+id/showVocabs"
-        android:title="Vokabeln anzeigen" />
+        android:title="Lektionen verwalten" />
 
 </menu>
