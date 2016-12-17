@@ -93,7 +93,11 @@
             android:layout_gravity="center_horizontal"
             android:layout_alignLeft="@+id/question"
             android:layout_alignStart="@+id/question"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:inputType="textCapWords"
+            android:imeActionLabel="@string/action_sign_in"/>
     </LinearLayout>
 
     <com.example.sco.imuvo.CustomViews.ButtonJokerman

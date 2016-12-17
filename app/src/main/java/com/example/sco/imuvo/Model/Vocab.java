@@ -71,4 +71,9 @@ public class Vocab {
     public void setSpeech(byte[] speech) {
         this.speech = speech;
     }
+
+    @Override
+    public String toString() {
+        return getForeign();
+    }
 }

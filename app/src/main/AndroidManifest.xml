@@ -13,10 +13,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Menu"/>
+        <activity android:name=".Activities.MenuImuvo"/>
         <activity android:name=".Activities.CreateUserActivity" />
         <activity android:name=".Activities.vocabReadingSelection" />
         <activity android:name=".Activities.readVocabs" />
         <activity android:name=".Activities.VocabList" />
+        <activity android:name=".Activities.askVocabs"/>
     </application>
 </manifest>

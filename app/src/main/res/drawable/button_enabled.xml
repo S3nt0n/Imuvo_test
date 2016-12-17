@@ -3,10 +3,10 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
     <solid
         android:color="@color/colorBackgroundButtons"/>
-    <padding android:left="7dp"
-        android:top="7dp"
-        android:right="7dp"
-        android:bottom="7dp" />
+    <padding android:left="15dp"
+        android:top="15dp"
+        android:right="15dp"
+        android:bottom="15dp" />
     <stroke
         android:width="2dip"
         android:color="@color/colorButtonBorder" />

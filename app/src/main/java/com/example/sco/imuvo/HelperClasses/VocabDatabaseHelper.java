@@ -103,10 +103,14 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         return vocabs;
     }
 
-    //public Cursor getAll() {
-    //    open();
-    //    return db.query(TABLE_NAME, USER_COLUMNS, null, null, null, null, "username");
-    //}
+    public Cursor getAll() {
+        Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, null,
+               null, null, null, null);
+        if (cursor != null){
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
 
     public long insert(Vocab vocab) {
         open();

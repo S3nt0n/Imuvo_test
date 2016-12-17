@@ -16,7 +16,7 @@ import com.example.sco.imuvo.HelperClasses.Helper;
 import com.example.sco.imuvo.R;
 import com.example.sco.imuvo.Model.User;
 
-public class Menu extends AppCompatActivity {
+public class MenuImuvo extends AppCompatActivity {
 
     ButtonJokerman playButton, readButton, vocabsButton, readAloudButton, testButton, taskButton;
     User user;

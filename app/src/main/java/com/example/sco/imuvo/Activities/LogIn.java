@@ -1,14 +1,17 @@
 package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.sco.imuvo.CustomViews.ButtonJokerman;
 import com.example.sco.imuvo.HelperClasses.UserDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.Helper;
 import com.example.sco.imuvo.R;
@@ -16,7 +19,7 @@ import com.example.sco.imuvo.Model.User;
 
 public class LogIn extends AppCompatActivity {
 
-    TextView welcomeTextView;
+    TextView welcomeTextView, bubbleTextView;
     Button startButton;
     EditText nameEditText, passwordEditText;
     public UserDatabaseHelper userDatabaseHelper;
@@ -28,8 +31,15 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         getElements();
         testFunction();
+        setInitData();
         userDatabaseHelper = UserDatabaseHelper.getInstance(this);
         userDatabaseHelper.Create();
+    }
+
+    private void setInitData() {
+        bubbleTextView.setText("Wilkommen! Ich bin Imuvo. Wie ist dein Name? " +
+                "TÖRÖÖÖÖÖ!");
+        bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
     }
 
     private void testFunction() {
@@ -42,11 +52,13 @@ public class LogIn extends AppCompatActivity {
         startButton = (Button) findViewById(R.id.start);
         nameEditText = (EditText) findViewById(R.id.name);
         passwordEditText = (EditText) findViewById(R.id.password);
+        bubbleTextView = (TextView) findViewById(R.id.bubbleTextLogIn);
+
     }
 
     public void onClickStart(View v){
         if(checkUserCorrect()){
-            final Intent menuIntent = new Intent(this,Menu.class);
+            final Intent menuIntent = new Intent(this,MenuImuvo.class);
             Bundle bundle = new Bundle();
             bundle.putString("username",nameEditText.getText().toString());
             menuIntent.putExtras(bundle);
@@ -55,14 +67,6 @@ public class LogIn extends AppCompatActivity {
         else{
             Helper.makeLongToast(this,"Name oder Passwort sind falsch. Bitte versuche es erneut.");
         }
-    }
-
-    public void onClickRegister(View v){
-        final Intent menuIntent = new Intent(this,CreateUserActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("username",nameEditText.getText().toString());
-        menuIntent.putExtras(bundle);
-        startActivity(menuIntent);
     }
 
     private boolean checkUserCorrect(){
@@ -79,5 +83,38 @@ public class LogIn extends AppCompatActivity {
             return false;
         }
 
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menulogin,menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.create_new:
+                newUser();
+                return true;
+            case R.id.showVocabs:
+                showVocabs();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showVocabs() {
+        final Intent menuIntent = new Intent(this,VocabList.class);
+        startActivity(menuIntent);
+    }
+
+    private void newUser() {
+        final Intent menuIntent = new Intent(this,CreateUserActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("username",nameEditText.getText().toString());
+        menuIntent.putExtras(bundle);
+        startActivity(menuIntent);
     }
 }
