@@ -15,4 +15,6 @@
         completions."
     </string>
     <string name="title_activity_read_vocabs">ReadVocabs</string>
+    <string name="title_activity_lection_list">LectionList</string>
+    <string name="title_activity_test">test</string>
 </resources>

@@ -106,7 +106,7 @@ public class LogIn extends AppCompatActivity {
     }
 
     private void showVocabs() {
-        final Intent menuIntent = new Intent(this,VocabList.class);
+        final Intent menuIntent = new Intent(this,LectionList.class);
         startActivity(menuIntent);
     }
 

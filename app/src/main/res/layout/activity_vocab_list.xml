@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/list" >
-</ListView>
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/list" >
+
+    </ListView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/list"
+        android:layout_alignBottom="@id/list"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/add_button"
+        android:onClick="addVocab"
+        android:layout_alignRight="@id/list" />
+
+</RelativeLayout>
+
+

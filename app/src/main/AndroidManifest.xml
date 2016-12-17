@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sco.imuvo">
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,14 +11,22 @@
         <activity android:name=".Activities.LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.MenuImuvo"/>
+        <activity android:name=".Activities.MenuImuvo" />
         <activity android:name=".Activities.CreateUserActivity" />
         <activity android:name=".Activities.vocabReadingSelection" />
         <activity android:name=".Activities.readVocabs" />
         <activity android:name=".Activities.VocabList" />
-        <activity android:name=".Activities.askVocabs"/>
+        <activity android:name=".Activities.askVocabs" />
+        <activity
+            android:name=".Activities.LectionList"
+            android:label="@string/title_activity_lection_list" />
+        <activity
+            android:name=".Activities.test"
+            android:label="@string/title_activity_test"></activity>
     </application>
+
 </manifest>

@@ -103,12 +103,18 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         return vocabs;
     }
 
+
+
     public Cursor getAll() {
+        open();
         Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, null,
                null, null, null, null);
-        if (cursor != null){
-            cursor.moveToFirst();
-        }
+        return cursor;
+    }
+    public Cursor getAll(int lectionNo) {
+        open();
+        Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, "lection=?",
+                new String[] { Integer.toString(lectionNo)}, null, null, null);
         return cursor;
     }
 
