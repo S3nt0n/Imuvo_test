@@ -1,5 +1,9 @@
 package com.example.sco.imuvo.Model;
 
+import com.example.sco.imuvo.HelperClasses.WebServiceHelper;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 
@@ -75,5 +79,11 @@ public class Vocab {
     @Override
     public String toString() {
         return getForeign();
+    }
+
+    public byte[] getSpeechFromWebservice(){
+        byte[] speech = null;
+        speech = WebServiceHelper.getSpeech(this.getForeign());
+        return speech;
     }
 }

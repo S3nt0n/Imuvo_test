@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.sco.imuvo.HelperClasses.Helper;
 import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.VocabDatabaseHelper;
+import com.example.sco.imuvo.HelperClasses.WebServiceHelper;
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.Vocab;
 import com.example.sco.imuvo.R;
@@ -107,6 +108,12 @@ public class readVocabs extends AppCompatActivity {
         } catch (NoSuchElementException e) {
             Helper.makeShortToast(this, "Es gibt keine vorherige Vokabel.");
         }
+
+    }
+
+    public void speakAloud(View v){
+
+        WebServiceHelper.playMp3(currVocab.getSpeechFromWebservice(),this);
 
     }
 }
