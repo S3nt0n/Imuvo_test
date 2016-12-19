@@ -44,7 +44,9 @@
             android:id="@+id/play"
             android:onClick="onClickPlay"
             android:layout_weight="1"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            style="@style/menu_button."
+            android:textColor="@color/colorMenuTextLeft" />
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:text="Lesen"
@@ -54,7 +56,8 @@
             android:onClick="onClickRead"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            />
+            style="@style/menu_button."
+            android:textColor="@color/colorMenuTextMiddle" />
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:text="Vokabeln"
@@ -63,7 +66,9 @@
             android:id="@+id/vocabs"
             android:layout_weight="1"
             android:onClick="onClickVocabs"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            style="@style/menu_button."
+            android:textColor="@color/colorMenuTextRight" />
 
     </LinearLayout>
 
@@ -80,7 +85,10 @@
             android:id="@+id/readAloud"
             android:onClick="onClickReadAloud"
             android:layout_weight="1"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            style="@style/menu_button."
+            android:fontFamily="sans-serif"
+            android:textColor="@color/colorMenuTextLeft" />
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:text="Test"
@@ -89,7 +97,9 @@
             android:layout_weight="1"
             android:id="@+id/test"
             android:onClick="onClickTest"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            style="@style/menu_button."
+            android:textColor="@color/colorMenuTextMiddle" />
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:text="Aufgaben"
@@ -98,7 +108,9 @@
             android:layout_height="match_parent"
             android:id="@+id/task"
             android:onClick="onClickTask"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            style="@style/menu_button."
+            android:textColor="@color/colorMenuTextRight" />
 
     </LinearLayout>
 

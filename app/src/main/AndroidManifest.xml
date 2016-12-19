@@ -23,7 +23,7 @@
         <activity android:name=".Activities.askVocabs" />
         <activity
             android:name=".Activities.LectionList"
-            android:label="@string/title_activity_lection_list" />
+             />
         <activity
             android:name=".Activities.test"
             android:label="@string/title_activity_test"></activity>

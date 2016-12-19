@@ -20,6 +20,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
@@ -34,6 +35,8 @@ public class askVocabs extends AppCompatActivity {
     Button nextButton, previousButton;
     TextView questionTextView, text2Text, headlineText, subHeadlineText;
     EditText answerEditText;
+    private long currentDirection;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +57,12 @@ public class askVocabs extends AppCompatActivity {
 
     private void setCurrVocab(Vocab vocab) {
         currVocab = vocab;
-        questionTextView.setText(vocab.getForeign());
+        if (currentDirection == 0l){
+            questionTextView.setText(vocab.getForeign());
+        }
+        else{
+            questionTextView.setText(vocab.getGerman());
+        }
 
         subHeadlineText.setText("Lektion " + Integer.toString(vocab.getLection()));
 
@@ -73,10 +81,13 @@ public class askVocabs extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         lectionDatabaseHelper = lectionDatabaseHelper.getInstance(this);
         currentLection = lectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
-        Helper.makeShortToast(this, Integer.toString(currentLection.getNumber()));
         vocabDatabaseHelper = vocabDatabaseHelper.getInstance(this);
         vocabList = vocabDatabaseHelper.getFromLection(currentLection.getNumber());
         vocabIterator = vocabList.listIterator(0);
+        if(bundle.getBoolean("isRandom")){
+            Collections.shuffle(vocabList);
+        }
+        currentDirection = bundle.getLong("selectedDirection");
 
     }
 
@@ -97,10 +108,19 @@ public class askVocabs extends AppCompatActivity {
 
     private boolean checkVocabRight() {
         String answer = answerEditText.getText().toString();
-        if (answer.contentEquals(currVocab.getGerman())) {
+        if (answer.contentEquals(getAnswer())) {
             return true;
         } else {
             return false;
+        }
+    }
+
+    private String getAnswer() {
+        if(currentDirection == 1l){
+            return(currVocab.getGerman());
+        }
+        else{
+            return(currVocab.getForeign());
         }
     }
 }

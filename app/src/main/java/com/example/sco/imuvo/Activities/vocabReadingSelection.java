@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
@@ -26,6 +27,7 @@ public class vocabReadingSelection extends AppCompatActivity {
     Spinner lectionSpinner,directionSpinner;
     TextView speechbubble;
     String nextIntentType;
+    CheckBox randomCheckBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,7 @@ public class vocabReadingSelection extends AppCompatActivity {
         directionSpinner = (Spinner) findViewById(R.id.directionSpinner);
         startButton = (Button) findViewById(R.id.start);
         speechbubble = (TextView) findViewById(R.id.speechbubble);
+        randomCheckBox = (CheckBox) findViewById(R.id.random);
     }
 
     private void loadLectionSpinnerData() {
@@ -90,6 +93,7 @@ public class vocabReadingSelection extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putLong("selectedLection",lectionSpinner.getSelectedItemId());
             bundle.putLong("selectedDirection",directionSpinner.getSelectedItemId());
+            bundle.putBoolean("isRandom",randomCheckBox.isChecked());
             nextIntent.putExtras(bundle);
             startActivity(nextIntent);
 

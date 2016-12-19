@@ -49,8 +49,8 @@ public class LogIn extends AppCompatActivity {
     }
 
     private void testFunction() {
-        nameEditText.setText("S");
-        passwordEditText.setText("0");
+        nameEditText.setText("Simon");
+        passwordEditText.setText("Simon");
     }
 
     public void getElements(){

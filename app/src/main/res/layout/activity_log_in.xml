@@ -60,7 +60,7 @@
             android:padding="5dp">
 
             <com.example.sco.imuvo.CustomViews.EditTextITCKRIST
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:layout_height="0dp"
                 android:inputType="text"
                 android:hint="Name"
@@ -73,7 +73,6 @@
                 android:background="@drawable/rectangleroundedvocabs"/>
 
             <com.example.sco.imuvo.CustomViews.EditTextITCKRIST
-                android:layout_width="100dp"
                 android:layout_height="0dp"
                 android:inputType="textVisiblePassword"
                 android:layout_gravity="center"
@@ -85,7 +84,8 @@
                 android:layout_alignLeft="@+id/name"
                 android:layout_alignStart="@+id/name"
                 android:layout_weight="1"
-                android:background="@drawable/rectangleroundedvocabs"/>
+                android:background="@drawable/rectangleroundedvocabs"
+                android:layout_width="200dp" />
         </LinearLayout>
 
 

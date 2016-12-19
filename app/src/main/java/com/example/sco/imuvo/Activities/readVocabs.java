@@ -19,6 +19,8 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
@@ -32,6 +34,8 @@ public class readVocabs extends AppCompatActivity {
     Vocab currVocab;
     Button nextButton, previousButton;
     TextView text1Text, text2Text, headlineText, subHeadlineText;
+    private long currentDirection;
+    private boolean randomDirection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +57,15 @@ public class readVocabs extends AppCompatActivity {
 
     private void setCurrVocab(Vocab vocab) {
         currVocab = vocab;
-        text1Text.setText(vocab.getForeign());
-        text2Text.setText(vocab.getGerman());
+        if(currentDirection == 1l) {
+            text1Text.setText(vocab.getForeign());
+            text2Text.setText(vocab.getGerman());
+        }
+        else{
+            text2Text.setText(vocab.getForeign());
+            text1Text.setText(vocab.getGerman());
+        }
         subHeadlineText.setText("Lektion " + Integer.toString(vocab.getLection()));
-
     }
 
     private void findElements() {
@@ -72,10 +81,14 @@ public class readVocabs extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         lectionDatabaseHelper = lectionDatabaseHelper.getInstance(this);
         currentLection = lectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
-        Helper.makeShortToast(this, Integer.toString(currentLection.getNumber()));
         vocabDatabaseHelper = vocabDatabaseHelper.getInstance(this);
         vocabList = vocabDatabaseHelper.getFromLection(currentLection.getNumber());
+        if(bundle.getBoolean("isRandom")){
+            Collections.shuffle(vocabList);
+        }
         vocabIterator = vocabList.listIterator(0);
+        randomDirection = bundle.getBoolean("isRandom");
+        currentDirection = bundle.getLong("selectedDirection");
 
     }
 
