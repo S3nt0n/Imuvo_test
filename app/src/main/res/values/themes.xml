@@ -1,6 +1,9 @@
 <resources>
     <style name="ImuvoTheme." parent="@style/Theme.AppCompat.Light">
         <item name="android:buttonStyle">@style/button</item>
-    
+        <item name="android:windowBackground">@color/layoutBackground</item>
+
+
+
     </style>
 </resources>

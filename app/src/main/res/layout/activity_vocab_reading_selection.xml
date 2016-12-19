@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_vocab_reading_selection"
     android:layout_width="match_parent"
@@ -11,29 +12,13 @@
     tools:context="com.example.sco.imuvo.Activities.vocabReadingSelection">
 
     <ImageView
-        android:layout_width="50dp"
-        android:src="@drawable/animal"
-        android:id="@+id/imageView"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/burgermenuselector"
+        android:id="@+id/imageView7"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="20dp"
-        android:id="@+id/speechbubble"
-        android:textSize="15sp"
-        android:textColor="@color/textcolorinbubble"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_height="200dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/speechbubbletop"/>
+        android:layout_alignParentStart="true" />
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
         android:text="Vokabeln lesen"
@@ -45,55 +30,97 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <com.example.sco.imuvo.CustomViews.ButtonJokerman
-        android:text="Los geht's"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/start"
-        android:onClick="onClickStartReading"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <com.example.sco.imuvo.CustomViews.CheckBoxITCKRIST
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/random"
-        android:layout_marginBottom="17dp"
-        android:layout_above="@+id/start"
+    <ImageView
+        android:layout_width="50dp"
+        android:src="@drawable/animal"
+        android:id="@+id/imageView"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
-        android:text="Zufällig"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@id/headline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="20dp"
+            android:id="@+id/speechbubble"
+            android:textSize="15sp"
+            android:textColor="@color/textcolorinbubble"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/speechbubbletop"
+            android:layout_weight="4"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/lectionSpinner"
+            android:spinnerMode="dialog"
+            android:background="@drawable/spinnerred"
+            android:layout_below="@+id/speechbubble"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:textAlignment="center"/>
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/directionSpinner"
+            android:spinnerMode="dialog"
+            android:background="@drawable/spinneryellow"
+            android:layout_above="@+id/random"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"
+            android:textAlignment="center"/>
+
+
+        <com.example.sco.imuvo.CustomViews.CheckBoxITCKRIST
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/random"
+            android:layout_marginBottom="17dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_weight="1"
+            android:text="Zufällige Reihenfolge"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+            android:textSize="15sp"
+            android:textAlignment="center"/>
+
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:text="Los geht's"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/start"
+            android:onClick="onClickStartReading"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/random"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView"
-        android:gravity="center_vertical"
-        android:layout_alignBottom="@+id/random"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/directionSpinner"
-        android:spinnerMode="dialog"
-        android:background="@drawable/spinner_yellow"
-        android:layout_above="@+id/random"
+        android:background="@drawable/burgermenuselector"
+        android:id="@+id/BurgerMenu"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lectionSpinner"
-        android:spinnerMode="dialog"
-        android:layout_above="@+id/directionSpinner"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="15dp" />
-
 </RelativeLayout>

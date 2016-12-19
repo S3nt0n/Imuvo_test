@@ -35,7 +35,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:layout_marginBottom="5dp">
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:text="Spielen"
@@ -46,7 +47,8 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             style="@style/menu_button."
-            android:textColor="@color/colorMenuTextLeft" />
+            android:textColor="@color/colorMenuTextLeft"
+            android:layout_marginRight="2dp"/>
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:text="Lesen"
@@ -57,7 +59,8 @@
             android:layout_weight="1"
             android:gravity="center_horizontal"
             style="@style/menu_button."
-            android:textColor="@color/colorMenuTextMiddle" />
+            android:textColor="@color/colorMenuTextMiddle"
+            android:layout_marginRight="2dp"/>
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:text="Vokabeln"
@@ -85,6 +88,7 @@
             android:id="@+id/readAloud"
             android:onClick="onClickReadAloud"
             android:layout_weight="1"
+            android:layout_marginRight="2dp"
             android:gravity="center_horizontal"
             style="@style/menu_button."
             android:fontFamily="sans-serif"
@@ -99,7 +103,8 @@
             android:onClick="onClickTest"
             android:gravity="center_horizontal"
             style="@style/menu_button."
-            android:textColor="@color/colorMenuTextMiddle" />
+            android:textColor="@color/colorMenuTextMiddle"
+            android:layout_marginRight="2dp"/>
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
             android:text="Aufgaben"

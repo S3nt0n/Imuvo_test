@@ -69,14 +69,14 @@ public class vocabReadingSelection extends AppCompatActivity {
         //SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this,R.layout.support_simple_spinner_dropdown_item,cursor,from,to,0);
         //lectionSpinner.setAdapter(cursorAdapter);
         List<String> lables = db.getAllLabels();
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, lables);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,R.layout.customspinner, lables);
+        dataAdapter.setDropDownViewResource(R.layout.customspinner);
         lectionSpinner.setAdapter(dataAdapter);
     }
 
     private void loadDirectionSpinnerData() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.direction_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.direction_array, R.layout.customspinner);
+        adapter.setDropDownViewResource(R.layout.customspinner);
         directionSpinner.setAdapter(adapter);
 
     }
