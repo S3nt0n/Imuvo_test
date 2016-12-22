@@ -111,7 +111,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            />
 
     </LinearLayout>
 
@@ -122,5 +123,6 @@
         android:id="@+id/BurgerMenu"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="onClickBurgerMenu"/>
 </RelativeLayout>

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_log_in"
+    android:id="@+id/activity_result_after_asking"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.sco.imuvo.Activities.readVocabs">
+    tools:context="com.example.sco.imuvo.Activities.resultAfterAsking">
     <ImageView
-        android:layout_height="250dp"
-        app:srcCompat="@drawable/rectanglerounded"
+        android:layout_height="match_parent"
+        android:src="@drawable/rectanglerounded"
         android:id="@+id/imageView5"
         android:layout_marginTop="20dp"
         android:layout_width="300dp"
@@ -45,7 +44,7 @@
 
     <ImageView
         android:layout_height="50dp"
-        app:srcCompat="@drawable/animal"
+        android:src="@drawable/animal"
         android:id="@+id/imageView2"
         android:layout_width="50dp"
         android:layout_alignParentTop="true"
@@ -71,24 +70,55 @@
             android:layout_width="@dimen/width_vocabs_rectangles"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/text2"
-            android:textAlignment="center"
-            android:gravity="center"
+            android:id="@+id/rightVocabs"
+
+            android:gravity="center_vertical"
             android:background="@drawable/rectangleroundedvocabs"
             android:layout_alignBottom="@+id/imageView5"
             android:layout_gravity="center_horizontal"
             android:layout_alignLeft="@+id/text1"
             android:layout_alignStart="@+id/text1"
-            android:layout_marginBottom="11dp"
-            android:textSize="20sp" />
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:paddingLeft="5dp"/>
 
         <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
             android:layout_width="@dimen/width_vocabs_rectangles"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/text1"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/skippedVocabs"
             android:background="@drawable/rectangleroundedvocabs"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:layout_alignTop="@+id/imageView5"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_above="@+id/text2"
+            android:paddingLeft="5dp"/>
+        <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
+            android:layout_width="@dimen/width_vocabs_rectangles"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/wrongVocabs"
+            android:background="@drawable/rectangleroundedvocabs"
+            android:gravity="center_vertical"
+            android:textSize="20sp"
+            android:layout_alignTop="@+id/imageView5"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_above="@+id/text2"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="5dp"/>
+
+        <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
+            android:layout_width="@dimen/width_vocabs_rectangles"
+            android:layout_height="0dp"
+            android:paddingLeft="5dp"
+            android:layout_weight="1"
+            android:id="@+id/duration"
+            android:background="@drawable/rectangleroundedvocabs"
+            android:gravity="center_vertical"
             android:textSize="20sp"
             android:layout_alignTop="@+id/imageView5"
             android:layout_centerHorizontal="true"
@@ -105,33 +135,5 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="onClickBurgerMenu"/>
-
-    <com.example.sco.imuvo.CustomViews.ButtonJokerman
-        android:layout_width="110dp"
-        android:id="@+id/previous"
-        android:onClick="onClickButtonPrevious"
-        android:background="@drawable/arrowleftselector"
-        android:textAlignment="center"
-
-        android:paddingLeft="10dp"
-        android:text="Vorherig"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <com.example.sco.imuvo.CustomViews.ButtonJokerman
-        android:id="@+id/next"
-        android:onClick="onClickButtonNext"
-        android:background="@drawable/arrowrightselector"
-        android:textAlignment="center"
-        android:paddingRight="10dp"
-        android:layout_width="100dp"
-        android:text="Nächste"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
 
 </RelativeLayout>

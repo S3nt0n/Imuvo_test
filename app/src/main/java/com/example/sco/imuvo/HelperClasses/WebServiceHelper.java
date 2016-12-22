@@ -6,6 +6,7 @@ package com.example.sco.imuvo.HelperClasses;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,6 +26,8 @@ import com.voicerss.tts.VoiceProvider;
 
 public class WebServiceHelper {
     public static byte[] getSpeech(String vocab) {
+
+
         VoiceProvider tts = new VoiceProvider("36911397cac94f028c2848220fa07eef");
 
         VoiceParameters params = new VoiceParameters("Hello World", Languages.English_UnitedStates);
@@ -34,11 +37,14 @@ public class WebServiceHelper {
         params.setSSML(false);
         params.setRate(0);
         byte[] result = null;
+        Log.i("ExceptionSpeech","VorWebservice");
         try {
+            Log.i("ExceptionSpeech","WebServiceCall");
             result = tts.speech(params);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.i("ExceptionSpeech", String.valueOf(e.getStackTrace()));
         }
+
         return result;
 
     }

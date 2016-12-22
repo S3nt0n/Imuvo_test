@@ -1,23 +1,20 @@
 package com.example.sco.imuvo.Activities;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.sco.imuvo.HelperClasses.Helper;
 import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.VocabDatabaseHelper;
+import com.example.sco.imuvo.Model.AskingSingleton;
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.Vocab;
 import com.example.sco.imuvo.R;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,10 +29,12 @@ public class askVocabs extends AppCompatActivity {
     Lection currentLection;
     ListIterator<?> vocabIterator;
     Vocab currVocab;
-    Button nextButton, previousButton;
-    TextView questionTextView, text2Text, headlineText, subHeadlineText;
+    Button nextButton;
+
+    TextView bubbleTextView, questionTextView, headlineText, subHeadlineText;
     EditText answerEditText;
     private long currentDirection;
+    private AskingSingleton askingSingleton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,21 +42,25 @@ public class askVocabs extends AppCompatActivity {
         setContentView(R.layout.activity_ask_vocabs);
         findElements();
         getCurrentLection();
-        setVocabs();
+        nextVocab();
+        askingSingleton = AskingSingleton.getInstance();
+        askingSingleton.resetData();
     }
 
-    private void setVocabs() {
+    private void nextVocab() {
         try {
             setCurrVocab((Vocab) vocabIterator.next());
         } catch (NoSuchElementException e) {
-            Helper.makeShortToast(this, "Es gibt keine Vokabeln für diese Lektion.");
+            final Intent intent = new Intent(this,resultAfterAsking.class);
+            startActivity(intent);
         }
+        answerEditText.setText("");
 
     }
 
     private void setCurrVocab(Vocab vocab) {
         currVocab = vocab;
-        if (currentDirection == 0l){
+        if (currentDirection == 1l){
             questionTextView.setText(vocab.getForeign());
         }
         else{
@@ -74,6 +77,7 @@ public class askVocabs extends AppCompatActivity {
         subHeadlineText = (TextView) findViewById(R.id.subHeadLine);
         headlineText = (TextView) findViewById(R.id.headline);
         nextButton = (Button) findViewById(R.id.next);
+        bubbleTextView = (TextView) findViewById(R.id.bubbleTextAsk);
 
     }
 
@@ -88,32 +92,56 @@ public class askVocabs extends AppCompatActivity {
             Collections.shuffle(vocabList);
         }
         currentDirection = bundle.getLong("selectedDirection");
-
+        if (currentDirection == 1l){
+            answerEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+        }
+        else{
+            answerEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+        }
     }
 
     public void onClickButtonNext(View v) {
-        if (checkVocabRight()) {
-            Helper.makeShortToast(this, "Vokabel war richtig!");
-            try {
-                setCurrVocab((Vocab) vocabIterator.next());
-            } catch (NoSuchElementException e) {
-                Helper.makeShortToast(this, "Letzte Vokabel erreicht!");
-            }
+        if (checkVocabCorrect()) {
+            vocabIsCorrect();
+
         }
-        else{
-            Helper.makeShortToast(this,"Leider falsch");
+        else {
+            vocabIsFalse();
+        }
+        nextVocab();
+    }
+
+    private void vocabIsFalse() {
+        if(!AskingSingleton.wrongVocabs.contains(currVocab)){
+            AskingSingleton.wrongVocabs.add(currVocab);
         }
 
     }
 
-    private boolean checkVocabRight() {
+    private void vocabIsCorrect() {
+        AskingSingleton.rightVocabs.add(currVocab);
+        setBubbleTextAndAnimate();
+    }
+
+    private boolean checkVocabCorrect() {
         String answer = answerEditText.getText().toString();
         if (answer.contentEquals(getAnswer())) {
             return true;
         } else {
             return false;
         }
+
     }
+
+    private void setBubbleTextAndAnimate() {
+        bubbleTextView.setText(getPositiveFeedbackText());
+        bubbleTextView.setVisibility(View.VISIBLE);
+    }
+
+    private String getPositiveFeedbackText() {
+        return("Gut gemacht!");
+    }
+
 
     private String getAnswer() {
         if(currentDirection == 1l){
@@ -122,5 +150,20 @@ public class askVocabs extends AppCompatActivity {
         else{
             return(currVocab.getForeign());
         }
+    }
+
+    public void onClickBurgerMenu(View v){
+        final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        startActivity(menuIntent);
+    }
+
+    public void onClickButtonSkip(View v){
+        skipVocab();
+    }
+
+    private void skipVocab() {
+        AskingSingleton.skippedVocabs.add(currVocab);
+        nextVocab();
+
     }
 }

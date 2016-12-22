@@ -9,6 +9,6 @@
         android:bottom="15dp" />
     <stroke
         android:width="2dip"
-        android:color="@color/colorButtonBorder" />
+        android:color="@color/colorMenuButtonBorder" />
     <corners android:radius= "8dp" />
 </shape>

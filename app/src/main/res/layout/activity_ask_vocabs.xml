@@ -107,14 +107,29 @@
         android:id="@+id/burgerMenu"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onClickBurgerMenu"/>
+
+    <com.example.sco.imuvo.CustomViews.ButtonJokerman
+        android:layout_width="150dp"
+        android:id="@+id/previous"
+        android:onClick="onClickButtonSkip"
+        android:background="@drawable/skip_button"
+        android:textAlignment="center"
+
+        android:paddingLeft="10dp"
+        android:text="Überspringen"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <com.example.sco.imuvo.CustomViews.ButtonJokerman
-        android:text="Nächste"
+        android:text="Prüfen"
         android:id="@+id/next"
         android:onClick="onClickButtonNext"
         android:background="@drawable/arrowrightselector"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:paddingLeft="10dp"
 
         android:layout_width="100dp"
@@ -122,5 +137,18 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
+        android:text="bubbleTextVie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bubbleTextAsk"
+        android:background="@drawable/speechbubbletop"
+        android:layout_below="@+id/subHeadLine"
+        android:layout_alignRight="@+id/imageView5"
+        android:layout_alignEnd="@+id/imageView5"
+        android:visibility="invisible"
+        />
+
 
 </RelativeLayout>

@@ -7,12 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sco.imuvo.CustomViews.ButtonJokerman;
 import com.example.sco.imuvo.CustomViews.TextViewITCKRIST;
-import com.example.sco.imuvo.HelperClasses.Helper;
+import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.R;
 import com.example.sco.imuvo.Model.User;
 
@@ -35,8 +34,7 @@ public class MenuImuvo extends AppCompatActivity {
     }
 
     private void getInitialValuesFromIntent(){
-        String username = getIntent().getExtras().getString("username");
-        user = new User(0,username,"");
+        user = new User(0,SingletonUser.data,"");
     }
     private void getElements() {
         playButton = (ButtonJokerman) findViewById(R.id.play);
@@ -77,10 +75,7 @@ public class MenuImuvo extends AppCompatActivity {
 
     }
     public void onClickTest(View v){
-        final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("type","test");
-        menuIntent.putExtras(bundle);
+        final Intent menuIntent = new Intent(this,testSelection.class);
         startActivity(menuIntent);
 
     }

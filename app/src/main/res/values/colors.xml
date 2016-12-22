@@ -10,7 +10,7 @@
     <color name="colorButtonBorder">#41719C</color>
     <color name="colorButtoPressed">#483D8B</color>
     <color name="colorButtonMenu">#FFFFFF</color>
-    <color name="colorMenuButtonBorder">#41719C</color>
+    <color name="colorMenuButtonBorder">#000000</color>
     <color name="colorMenuButtonPressed">#5B9BD5</color>
     <color name="colorMenuTextLeft">#4472C4</color>
     <color name="colorMenuTextMiddle">#ff0000</color>

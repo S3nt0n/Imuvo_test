@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.sco.imuvo.HelperClasses.GeneralDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.InitData;
 import com.example.sco.imuvo.HelperClasses.UserDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.Helper;
+import com.example.sco.imuvo.Model.SingletonUser;
 import com.example.sco.imuvo.R;
 import com.example.sco.imuvo.Model.User;
 
@@ -65,9 +65,8 @@ public class LogIn extends AppCompatActivity {
     public void onClickStart(View v){
         if(checkUserCorrect()){
             final Intent menuIntent = new Intent(this,MenuImuvo.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("username",nameEditText.getText().toString());
-            menuIntent.putExtras(bundle);
+            String username = nameEditText.getText().toString();
+            SingletonUser.data = username;
             startActivity(menuIntent);
         }
         else{
@@ -117,9 +116,11 @@ public class LogIn extends AppCompatActivity {
 
     private void newUser() {
         final Intent menuIntent = new Intent(this,CreateUserActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("username",nameEditText.getText().toString());
-        menuIntent.putExtras(bundle);
+        //Bundle bundle = new Bundle();
+        //bundle.putString("username",nameEditText.getText().toString());
+        //menuIntent.putExtras(bundle);
+        String username = nameEditText.getText().toString();
+        SingletonUser.data = username;
         startActivity(menuIntent);
     }
 }

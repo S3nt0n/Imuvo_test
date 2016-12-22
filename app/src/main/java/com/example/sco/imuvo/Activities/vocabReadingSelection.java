@@ -108,4 +108,8 @@ public class vocabReadingSelection extends AppCompatActivity {
         return true;
     }
 
+    public void onClickBurgerMenu(View v){
+        final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        startActivity(menuIntent);
+    }
 }

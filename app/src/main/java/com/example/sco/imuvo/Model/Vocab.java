@@ -1,5 +1,7 @@
 package com.example.sco.imuvo.Model;
 
+import android.util.Log;
+
 import com.example.sco.imuvo.HelperClasses.WebServiceHelper;
 
 import java.io.FileNotFoundException;
@@ -83,7 +85,9 @@ public class Vocab {
 
     public byte[] getSpeechFromWebservice(){
         byte[] speech = null;
+        Log.i("ExceptionSpeech","Test");
         speech = WebServiceHelper.getSpeech(this.getForeign());
+        Log.i("ExceptionSpeech",speech.toString());
         return speech;
     }
 }
