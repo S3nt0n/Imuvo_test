@@ -1,10 +1,14 @@
 package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +24,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class askVocabs extends AppCompatActivity {
 
@@ -120,7 +128,21 @@ public class askVocabs extends AppCompatActivity {
 
     private void vocabIsCorrect() {
         AskingSingleton.rightVocabs.add(currVocab);
+        if(positiveFeedbackRelevant())
         setBubbleTextAndAnimate();
+    }
+
+    private boolean positiveFeedbackRelevant() {
+        Random rand = new Random();
+        int val = rand.nextInt(4) + 1;
+        if (val == 1)
+        {
+            return true;  //25%
+        }
+        else
+        {
+            return false; //75%
+        }
     }
 
     private boolean checkVocabCorrect() {
@@ -136,6 +158,27 @@ public class askVocabs extends AppCompatActivity {
     private void setBubbleTextAndAnimate() {
         bubbleTextView.setText(getPositiveFeedbackText());
         bubbleTextView.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fade_in);
+        bubbleTextView.startAnimation(animation);
+
+        Thread t = new Thread() {
+            public void run() {
+                try {
+                    sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_fade_out);
+                        bubbleTextView.startAnimation(animation);
+                        bubbleTextView.setVisibility(View.INVISIBLE);
+                    }
+                });
+            }
+        };
+        t.start();
     }
 
     private String getPositiveFeedbackText() {
