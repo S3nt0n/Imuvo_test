@@ -2,6 +2,7 @@ package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,7 +41,6 @@ public class readVocabs extends AppCompatActivity {
     Button nextButton, previousButton;
     TextView text1Text, text2Text, headlineText, subHeadlineText;
     private long currentDirection;
-    private boolean randomDirection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +92,8 @@ public class readVocabs extends AppCompatActivity {
             Collections.shuffle(vocabList);
         }
         vocabIterator = vocabList.listIterator(0);
-        randomDirection = bundle.getBoolean("isRandom");
         currentDirection = bundle.getLong("selectedDirection");
-
+        headlineText.setText(Helper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
     }
 
     public void onClickButtonNext(View v) {

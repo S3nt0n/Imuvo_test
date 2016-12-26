@@ -33,7 +33,7 @@ public class resultAfterAsking extends AppCompatActivity {
 
     private void setValuesToTextView() {
         rightTextView.setText("Richtig: " + Integer.toString(rightVocabList.size()));
-        skippedTextView.setText("Übersprungen: " + Integer.toString(skippedVocabList.size()));
+        //skippedTextView.setText("Übersprungen: " + Integer.toString(skippedVocabList.size()));
         wrongTextView.setText("Falsch: " + Integer.toString(wrongVocabList.size()));
         AskingSingleton.endingDate = (Date) Calendar.getInstance().getTime();
 
@@ -58,7 +58,7 @@ public class resultAfterAsking extends AppCompatActivity {
         //speechbubble = (TextView) findViewById(R.id.speechbubble);
         rightTextView = (TextView) findViewById(R.id.rightVocabs);
         wrongTextView = (TextView) findViewById(R.id.wrongVocabs);
-        skippedTextView = (TextView) findViewById(R.id.skippedVocabs);
+        //skippedTextView = (TextView) findViewById(R.id.skippedVocabs);
         durationTextView = (TextView) findViewById(R.id.duration);
     }
 
@@ -79,5 +79,27 @@ public class resultAfterAsking extends AppCompatActivity {
     public void onClickBurgerMenu(View v){
         final Intent menuIntent = new Intent(this,MenuImuvo.class);
         startActivity(menuIntent);
+    }
+
+    public void onClickButtonMoreAsking(View v){
+        final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("type","test");
+        menuIntent.putExtras(bundle);
+        startActivity(menuIntent);
+    }
+
+    public void onClickButtonOverview(View v){
+        final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        startActivity(menuIntent);
+    }
+
+    public void onClickShowWrongVocabs(View v){
+        final Intent intent = new Intent(this, askVocabs.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(askVocabs.ASKWRONGVOCABSAGAIN,true);
+        bundle.putBoolean(askVocabs.ISRANDOM,true);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

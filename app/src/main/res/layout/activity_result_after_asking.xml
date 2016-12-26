@@ -9,8 +9,19 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.sco.imuvo.Activities.resultAfterAsking">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/burgermenuselector"
+        android:id="@+id/BurgerMenu"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onClickBurgerMenu"/>
+
     <ImageView
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:src="@drawable/rectanglerounded"
         android:id="@+id/imageView5"
         android:layout_marginTop="20dp"
@@ -20,17 +31,18 @@
         />
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Vokabeln lesen"
+        android:text="Ergebnis"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/headline"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:textColor="@color/colorMenuTextLeft" />
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Lektion X"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/headline"
@@ -60,11 +72,11 @@
         android:layout_alignTop="@+id/imageView5"
         android:layout_alignLeft="@+id/imageView5"
         android:layout_alignStart="@+id/imageView5"
-        android:layout_alignBottom="@+id/imageView5"
         android:layout_alignRight="@+id/imageView5"
         android:layout_alignEnd="@+id/imageView5"
         android:paddingTop="20dp"
-        android:paddingBottom="20dp">
+        android:paddingBottom="20dp"
+        android:layout_alignBottom="@+id/imageView5">
 
         <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
             android:layout_width="@dimen/width_vocabs_rectangles"
@@ -79,23 +91,9 @@
             android:layout_alignLeft="@+id/text1"
             android:layout_alignStart="@+id/text1"
             android:layout_marginBottom="10dp"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:paddingLeft="5dp"/>
 
-        <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
-            android:layout_width="@dimen/width_vocabs_rectangles"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/skippedVocabs"
-            android:background="@drawable/rectangleroundedvocabs"
-            android:gravity="center_vertical"
-            android:textSize="20sp"
-            android:layout_alignTop="@+id/imageView5"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_above="@+id/text2"
-            android:paddingLeft="5dp"/>
         <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
             android:layout_width="@dimen/width_vocabs_rectangles"
             android:layout_height="0dp"
@@ -103,7 +101,7 @@
             android:id="@+id/wrongVocabs"
             android:background="@drawable/rectangleroundedvocabs"
             android:gravity="center_vertical"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_alignTop="@+id/imageView5"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
@@ -119,21 +117,56 @@
             android:id="@+id/duration"
             android:background="@drawable/rectangleroundedvocabs"
             android:gravity="center_vertical"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:layout_alignTop="@+id/imageView5"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_above="@+id/text2" />
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:text="Falsche Vokabeln erneut abfragen"
+            android:layout_width="200dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_height="0dp"
+            android:id="@+id/button"
+            android:layout_weight="2"
+            android:background="@drawable/button_menu"
+            style="@style/menu_button."
+            android:textColor="@color/colorMenuTextLeft"
+            android:onClick="onClickShowWrongVocabs"/>
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/burgermenuselector"
-        android:id="@+id/BurgerMenu"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onClickBurgerMenu"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="300dp"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/imageView5"
+        android:layout_marginTop="10dp">
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:textColor="@color/colorMenuTextLeft"
+            android:text="Übersicht"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/button3"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/button_menu"
+            android:onClick="onClickButtonOverview"/>
+
+        <com.example.sco.imuvo.CustomViews.ButtonJokerman
+            android:textColor="@color/colorMenuTextLeft"
+            android:text="Weitere Abfrage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/button2"
+            android:layout_weight="1"
+            android:background="@drawable/button_menu"
+            android:onClick="onClickButtonMoreAsking"/>
+    </LinearLayout>
 
 </RelativeLayout>

@@ -3,6 +3,8 @@ package com.example.sco.imuvo.Activities;
 import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.sco.imuvo.HelperClasses.Helper;
 import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
 import com.example.sco.imuvo.Model.Lection;
 import com.example.sco.imuvo.Model.User;
@@ -25,7 +28,7 @@ import java.util.List;
 public class vocabReadingSelection extends AppCompatActivity {
     Button startButton;
     Spinner lectionSpinner,directionSpinner;
-    TextView speechbubble;
+    TextView speechbubble, headline;
     String nextIntentType;
     CheckBox randomCheckBox;
     @Override
@@ -41,8 +44,17 @@ public class vocabReadingSelection extends AppCompatActivity {
     }
 
     private void setSpeechbubble() {
-        speechbubble.setText("Super! Du möchtest Dir Vokabeln anhören. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Vorlesen beginnst.\n" +
-                "\n");
+        if(nextIntentType.contentEquals("read")){
+            speechbubble.setText("Super! Du möchtest Vokabeln lesen. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Lesen beginnst.");
+            headline.setText(Helper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+        }
+        else{
+            speechbubble.setText("Du möchtest Vokabeln mit einer Abfrage üben. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Üben beginnst.");
+
+            headline.setText(Helper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+        }
+
+
     }
 
 
@@ -56,6 +68,7 @@ public class vocabReadingSelection extends AppCompatActivity {
         directionSpinner = (Spinner) findViewById(R.id.directionSpinner);
         startButton = (Button) findViewById(R.id.start);
         speechbubble = (TextView) findViewById(R.id.speechbubble);
+        headline = (TextView) findViewById(R.id.headline);
         randomCheckBox = (CheckBox) findViewById(R.id.random);
     }
 

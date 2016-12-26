@@ -28,16 +28,21 @@
         <activity
             android:name=".Activities.vocabReadingSelection"
             android:screenOrientation="nosensor" />
-        <activity android:name=".Activities.readVocabs" />
-        <activity android:name=".Activities.VocabList" />
-        <activity android:name=".Activities.askVocabs" />
+        <activity android:name=".Activities.readVocabs"
+            android:screenOrientation="nosensor"/>
+        <activity android:name=".Activities.VocabList"
+            android:screenOrientation="nosensor"/>
+        <activity android:name=".Activities.askVocabs"
+            android:screenOrientation="nosensor"/>
         <activity
             android:name=".Activities.LectionList"
             android:screenOrientation="nosensor" />
-        <activity android:name=".Activities.testSelection"
+        <activity
+            android:name=".Activities.testSelection"
             android:screenOrientation="nosensor" />
-        <activity android:name=".Activities.resultAfterAsking"
-            android:screenOrientation="nosensor" ></activity>
+        <activity
+            android:name=".Activities.resultAfterAsking"
+            android:screenOrientation="nosensor" />
     </application>
 
 </manifest>

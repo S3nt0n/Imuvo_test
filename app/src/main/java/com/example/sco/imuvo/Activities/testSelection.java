@@ -1,6 +1,7 @@
 package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,13 +11,14 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.sco.imuvo.HelperClasses.Helper;
 import com.example.sco.imuvo.HelperClasses.LectionDatabaseHelper;
 import com.example.sco.imuvo.R;
 
 import java.util.List;
 
 public class testSelection extends AppCompatActivity {
-    TextView speechbubble;
+    TextView speechbubble, headlineTextView;
     String nextIntentType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class testSelection extends AppCompatActivity {
 
     private void setSpeechbubble() {
         speechbubble.setText("Sehr gut! Du möchtest Vokabeln üben. Bitte entscheide dich zwischen einer Abfrage oder einem Vokabeltest");
+        headlineTextView.setText(Helper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
     }
 
 
@@ -39,6 +42,7 @@ public class testSelection extends AppCompatActivity {
     }
     private void getElements() {
         speechbubble = (TextView) findViewById(R.id.speechbubble);
+        headlineTextView = (TextView) findViewById(R.id.headline);
     }
 
      public void onClickStartTest(View v){

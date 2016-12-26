@@ -96,8 +96,7 @@
             android:textSize="20sp"
             android:imeOptions="actionDone"
             android:maxLines="1"
-            android:inputType="textCapWords"
-            android:imeActionLabel="@string/action_sign_in"/>
+            android:imeActionLabel="Enter"/>
     </LinearLayout>
 
     <Button
@@ -148,6 +147,7 @@
         android:layout_alignRight="@+id/imageView5"
         android:layout_alignEnd="@+id/imageView5"
         android:visibility="invisible"
+        android:textColor="#FFFFFF"
         />
 
 

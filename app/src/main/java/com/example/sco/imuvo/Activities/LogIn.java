@@ -1,13 +1,16 @@
 package com.example.sco.imuvo.Activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -46,6 +49,7 @@ public class LogIn extends AppCompatActivity {
         bubbleTextView.setText("Wilkommen! Ich bin Imuvo. Wie ist dein Name? " +
                 "TÖRÖÖÖÖÖ!");
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
+        welcomeTextView.setText(Helper.colorsString("Lernen mit Imuvo", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle),ContextCompat.getColor(this, R.color.colorMenuTextRight)));
     }
 
     private void testFunction() {
