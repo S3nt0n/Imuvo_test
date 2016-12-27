@@ -1,12 +1,15 @@
 package com.example.sco.imuvo.Activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sco.imuvo.CustomViews.ButtonJokerman;
@@ -31,6 +34,40 @@ public class MenuImuvo extends AppCompatActivity {
         getElements();
         getInitialValuesFromIntent();
         getBubble();
+    }
+
+    @Override
+    public  void onBackPressed(){
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+
+        dialog.setContentView(R.layout.activity_custom_dialog);
+        TextView textView = (TextView) dialog.findViewById(R.id.textView);
+        textView.setText("Willst du dich ausloggen?");
+        Button repeatButton = (Button) dialog.findViewById(R.id.solution);
+        repeatButton.setText("Ja");
+        repeatButton.setTextColor(Color.GREEN);
+        repeatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                finish();
+
+            }
+        });
+
+        Button showSolutionButton = (Button) dialog.findViewById(R.id.repeat);
+        showSolutionButton.setText("Nein");
+        showSolutionButton.setTextColor(Color.RED);
+        showSolutionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog.show();
     }
 
     private void getInitialValuesFromIntent(){

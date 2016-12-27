@@ -83,11 +83,4 @@ public class Vocab {
         return getForeign();
     }
 
-    public byte[] getSpeechFromWebservice(){
-        byte[] speech = null;
-        Log.i("ExceptionSpeech","Test");
-        speech = WebServiceHelper.getSpeech(this.getForeign());
-        Log.i("ExceptionSpeech",speech.toString());
-        return speech;
-    }
 }

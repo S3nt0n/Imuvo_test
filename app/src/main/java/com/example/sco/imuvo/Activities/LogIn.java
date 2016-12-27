@@ -1,6 +1,7 @@
 package com.example.sco.imuvo.Activities;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
@@ -37,12 +38,18 @@ public class LogIn extends AppCompatActivity {
         getElements();
         testFunction();
         setInitData();
-        initSQLData();
+        initSQLData(this);
 
     }
 
-    private void initSQLData() {
-        InitData.initSQLData(this);
+    private void initSQLData(final Context context) {
+        new Thread(new Runnable() {
+            public void run() {
+                InitData.initSQLData(context);
+            }
+        }).start();
+
+
     }
 
     private void setInitData() {
@@ -71,6 +78,8 @@ public class LogIn extends AppCompatActivity {
             final Intent menuIntent = new Intent(this,MenuImuvo.class);
             String username = nameEditText.getText().toString();
             SingletonUser.data = username;
+            nameEditText.setText("");
+            passwordEditText.setText("");
             startActivity(menuIntent);
         }
         else{

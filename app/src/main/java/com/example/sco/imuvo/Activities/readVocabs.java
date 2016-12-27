@@ -1,7 +1,10 @@
 package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +26,19 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.voicerss.tts.AudioCodec;
+import com.voicerss.tts.AudioFormat;
+import com.voicerss.tts.Languages;
+import com.voicerss.tts.SpeechDataEvent;
+import com.voicerss.tts.SpeechDataEventListener;
+import com.voicerss.tts.SpeechErrorEvent;
+import com.voicerss.tts.SpeechErrorEventListener;
+import com.voicerss.tts.VoiceParameters;
+import com.voicerss.tts.VoiceProvider;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -41,6 +56,7 @@ public class readVocabs extends AppCompatActivity {
     Button nextButton, previousButton;
     TextView text1Text, text2Text, headlineText, subHeadlineText;
     private long currentDirection;
+    MediaPlayer mp = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +130,66 @@ public class readVocabs extends AppCompatActivity {
 
     }
 
-    public void speakAloud(View v){
+    public void speakAloud(View v) {
 
-        WebServiceHelper.playMp3(currVocab.getSpeechFromWebservice(),this);
+        try {
+            final MediaPlayer.OnPreparedListener onPreparedListener = new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.setVolume(1, 1);
+                    mp.start();
+                }
+            };
+
+            final MediaPlayer.OnErrorListener onErrorListener = new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mp, int what, int extra) {
+                    return false;
+                }
+            };
+
+            final MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mp.release();
+                    mp = null;
+                }
+            };
+
+
+            try {
+                String fileName = getCacheDir() + "/voice.mp3";
+
+                File file = new File(fileName);
+                FileOutputStream fos = new FileOutputStream(file);
+                fos.write(currVocab.getSpeech());
+                fos.close();
+
+                AudioManager audioManager = (AudioManager) getSystemService(readVocabs.AUDIO_SERVICE);
+                audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), 0);
+
+                if (mp != null)
+                    mp.release();
+
+                FileInputStream fis = new FileInputStream(fileName);
+
+                mp = new MediaPlayer();
+                mp.setAudioStreamType(AudioManager.STREAM_SYSTEM);
+                mp.setDataSource(fis.getFD());
+                mp.setOnErrorListener(onErrorListener);
+                mp.setOnCompletionListener(onCompletionListener);
+                mp.setOnPreparedListener(onPreparedListener);
+                mp.prepareAsync();
+
+                fis.close();
+            } catch (Exception ex) {
+                Log.i("Fehler3", ex.toString());
+
+            }
+        }
+        catch (Exception ex){
+            Log.i("Fehler4",ex.toString());
+        }
     }
 
     public void onClickBurgerMenu(View v){
