@@ -39,6 +39,7 @@ import com.voicerss.tts.VoiceProvider;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -165,23 +166,18 @@ public class readVocabs extends AppCompatActivity {
                 fos.write(currVocab.getSpeech());
                 fos.close();
 
-                AudioManager audioManager = (AudioManager) getSystemService(readVocabs.AUDIO_SERVICE);
-                audioManager.setStreamVolume(AudioManager.STREAM_SYSTEM, audioManager.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), 0);
+                try {
+                   MediaPlayer mediaPlayer = new MediaPlayer();
 
-                if (mp != null)
-                    mp.release();
+                    FileInputStream MyFile = new FileInputStream(file);
+                    mediaPlayer.setDataSource(MyFile.getFD());
 
-                FileInputStream fis = new FileInputStream(fileName);
-
-                mp = new MediaPlayer();
-                mp.setAudioStreamType(AudioManager.STREAM_SYSTEM);
-                mp.setDataSource(fis.getFD());
-                mp.setOnErrorListener(onErrorListener);
-                mp.setOnCompletionListener(onCompletionListener);
-                mp.setOnPreparedListener(onPreparedListener);
-                mp.prepareAsync();
-
-                fis.close();
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+                } catch (IOException ex) {
+                    String s = ex.toString();
+                    ex.printStackTrace();
+                }
             } catch (Exception ex) {
                 Log.i("Fehler3", ex.toString());
 
