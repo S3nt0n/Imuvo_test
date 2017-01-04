@@ -38,7 +38,7 @@ public class resultAfterAsking extends AppCompatActivity {
         AskingSingleton.endingDate = (Date) Calendar.getInstance().getTime();
 
         long duration = ((long) (AskingSingleton.endingDate.getTime() - AskingSingleton.startingDate.getTime()));
-        durationTextView.setText("Dauer : " + Long.toString(duration / 100 / 60) + "min");
+        durationTextView.setText("Dauer: " + Long.toString(duration / 1000 / 60) + " min");
     }
 
     private void getValuesFromSingleton() {
@@ -78,7 +78,9 @@ public class resultAfterAsking extends AppCompatActivity {
 
     public void onClickBurgerMenu(View v){
         final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
+        finish();
     }
 
     public void onClickButtonMoreAsking(View v){
@@ -86,7 +88,9 @@ public class resultAfterAsking extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString("type","test");
         menuIntent.putExtras(bundle);
+        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
+        finish();
     }
 
     public void onClickButtonOverview(View v){
@@ -101,5 +105,6 @@ public class resultAfterAsking extends AppCompatActivity {
         bundle.putBoolean(askVocabs.ISRANDOM,true);
         intent.putExtras(bundle);
         startActivity(intent);
+        finish();
     }
 }

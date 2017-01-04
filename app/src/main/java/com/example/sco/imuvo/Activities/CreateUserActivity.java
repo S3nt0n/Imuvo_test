@@ -31,6 +31,7 @@ public class CreateUserActivity extends AppCompatActivity {
             Helper.makeLongToast(this,"Nutzer wurde angelegt.");
             final Intent menuIntent = new Intent(this,LogIn.class);
             startActivity(menuIntent);
+            finish();
         }
         else{
             Helper.makeLongToast(this,"Name oder Passwort sind falsch. Bitte versuche es erneut.");

@@ -46,21 +46,25 @@ public class testSelection extends AppCompatActivity {
     }
 
      public void onClickStartTest(View v){
-        //final Intent nextIntent;
-        //nextIntent = new Intent(this,askVocabs.class);
-        //startActivity(nextIntent);
+         final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
+         Bundle bundle = new Bundle();
+         bundle.putString("type",vocabReadingSelection.TEST);
+         menuIntent.putExtras(bundle);
+         startActivity(menuIntent);
     }
 
     public void onClickStartAsking(View v){
         final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type","test");
+        bundle.putString("type",vocabReadingSelection.ASKING);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
     }
 
     public void onClickBurgerMenu(View v){
         final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
+        finish();
     }
 }

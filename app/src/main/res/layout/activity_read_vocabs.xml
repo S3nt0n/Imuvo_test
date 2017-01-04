@@ -67,23 +67,42 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp">
 
-        <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
-            android:layout_width="@dimen/width_vocabs_rectangles"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/text2"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:background="@drawable/rectangleroundedvocabs"
-            android:layout_alignBottom="@+id/imageView5"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignLeft="@+id/text1"
-            android:layout_alignStart="@+id/text1"
-            android:layout_marginBottom="11dp"
-            android:textSize="20sp" />
+            android:layout_marginBottom="11dp">
+
+            <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
+                android:layout_width="240dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:id="@+id/text2"
+                android:background="@drawable/rectangleroundedvocabs"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="75dp"
+                app:srcCompat="@drawable/animal"
+                android:id="@+id/vocabImage"
+                android:layout_alignRight="@+id/text2"
+                android:layout_alignEnd="@+id/text2"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
 
         <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
-            android:layout_width="@dimen/width_vocabs_rectangles"
+            android:layout_width="240dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/text1"
@@ -95,13 +114,6 @@
             android:layout_gravity="center"
             android:layout_above="@+id/text2" />
 
-        <Button
-            android:text="anhören"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/button4"
-            android:layout_weight="1"
-            android:onClick="speakAloud"/>
     </LinearLayout>
 
     <Button
@@ -140,6 +152,20 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <ImageButton
+        android:text="anhören"
+        android:layout_width="60dp"
+        android:layout_centerInParent="true"
+        android:layout_height="60dp"
+        android:id="@+id/earButton"
+        android:layout_weight="1"
+        android:onClick="speakAloud"
+        android:background="@drawable/ear_selector"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        />
 
 
 </RelativeLayout>

@@ -18,7 +18,7 @@ public class GeneralDatabaseHelper extends SQLiteOpenHelper {
             + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT, password TEXT)";
 
     private static final String VOCAB_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo " +
-            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, speech BLOB, lection INTEGER)";
+            "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, speech BLOB, lection INTEGER, picture BLOB)";
 
     private static final String LECTION_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS lection_imuvo " +
             "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, number INTEGER, language TEXT)";

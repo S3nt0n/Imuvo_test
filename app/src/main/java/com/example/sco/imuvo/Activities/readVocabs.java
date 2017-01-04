@@ -1,6 +1,8 @@
 package com.example.sco.imuvo.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -13,6 +15,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.HelperClasses.Helper;
@@ -55,19 +59,27 @@ public class readVocabs extends AppCompatActivity {
     ListIterator<?> vocabIterator;
     Vocab currVocab;
     Button nextButton, previousButton;
+    ImageButton earButton;
     TextView text1Text, text2Text, headlineText, subHeadlineText;
     private long currentDirection;
     MediaPlayer mp = null;
+    private String nextIntentType;
+    private ImageView vocabPictureImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read_vocabs);
+        getInitialValuesFromIntent();
         findElements();
         getCurrentLection();
         setVocabs();
     }
+    private void getInitialValuesFromIntent(){
+        Bundle bundle = getIntent().getExtras();
+        nextIntentType = bundle.getString("type");
 
+    }
     private void setVocabs() {
         try {
             setCurrVocab((Vocab) vocabIterator.next());
@@ -88,6 +100,14 @@ public class readVocabs extends AppCompatActivity {
             text1Text.setText(vocab.getGerman());
         }
         subHeadlineText.setText("Lektion " + Integer.toString(vocab.getLection()));
+        if(currVocab.getPicture() != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(currVocab.getPicture(), 0, currVocab.getPicture().length);
+            vocabPictureImageView.setImageBitmap(bitmap);
+            vocabPictureImageView.setVisibility(View.VISIBLE);
+        }
+        else{
+            vocabPictureImageView.setVisibility(View.GONE);
+        }
     }
 
     private void findElements() {
@@ -97,6 +117,15 @@ public class readVocabs extends AppCompatActivity {
         headlineText = (TextView) findViewById(R.id.headline);
         nextButton = (Button) findViewById(R.id.next);
         previousButton = (Button) findViewById(R.id.previous);
+        earButton = (ImageButton) findViewById(R.id.earButton);
+        if(nextIntentType.contentEquals("read")){
+            earButton.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            earButton.setVisibility(View.VISIBLE);
+        }
+        vocabPictureImageView = (ImageView) findViewById(R.id.vocabImage);
     }
 
     private void getCurrentLection() {
@@ -132,32 +161,6 @@ public class readVocabs extends AppCompatActivity {
     }
 
     public void speakAloud(View v) {
-
-        try {
-            final MediaPlayer.OnPreparedListener onPreparedListener = new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer mp) {
-                    mp.setVolume(1, 1);
-                    mp.start();
-                }
-            };
-
-            final MediaPlayer.OnErrorListener onErrorListener = new MediaPlayer.OnErrorListener() {
-                @Override
-                public boolean onError(MediaPlayer mp, int what, int extra) {
-                    return false;
-                }
-            };
-
-            final MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    mp.release();
-                    mp = null;
-                }
-            };
-
-
             try {
                 String fileName = getCacheDir() + "/voice.mp3";
 
@@ -182,15 +185,15 @@ public class readVocabs extends AppCompatActivity {
                 Log.i("Fehler3", ex.toString());
 
             }
-        }
-        catch (Exception ex){
-            Log.i("Fehler4",ex.toString());
-        }
     }
+
+
 
     public void onClickBurgerMenu(View v){
         final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
+        finish();
     }
 
 

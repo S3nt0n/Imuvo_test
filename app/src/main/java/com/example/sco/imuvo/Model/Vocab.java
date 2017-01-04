@@ -19,17 +19,16 @@ public class Vocab {
     private String foreign;
     private byte[] speech;
     private int lection;
+    private byte[] picture;
 
 
-
-    public Vocab(long sqlID, String german, String foreign, int lection, byte[] speech) {
+    public Vocab(long sqlID, String german, String foreign, int lection, byte[] speech, byte[] picture) {
         this.sqlID = sqlID;
         this.german = german;
         this.foreign = foreign;
-        this.lection = lection;
         this.speech = speech;
-
-
+        this.lection = lection;
+        this.picture = picture;
     }
 
     public Vocab(String german, String foreign, int lection) {
@@ -83,4 +82,11 @@ public class Vocab {
         return getForeign();
     }
 
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
 }

@@ -2,7 +2,8 @@ package com.example.sco.imuvo.Activities;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.Handler;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +12,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.HelperClasses.Helper;
@@ -26,11 +27,11 @@ import com.example.sco.imuvo.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
+
 
 
 public class askVocabs extends AppCompatActivity {
@@ -43,13 +44,65 @@ public class askVocabs extends AppCompatActivity {
     Lection currentLection;
     ListIterator<?> vocabIterator;
     Vocab currVocab;
-    Button nextButton;
+    Button nextButton, skipButton;
 
     TextView bubbleTextView, questionTextView, headlineText, subHeadlineText;
     EditText answerEditText;
+    ImageView vocabPictureImageView;
     private long currentDirection;
     private AskingSingleton askingSingleton;
     private boolean doNotCheckAnswer = false;
+
+    private void vocabIsFalse() {
+        if (getIntent().getExtras().getBoolean("isMultipleLection")){
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+
+            dialog.setContentView(R.layout.activity_custom_dialog);
+
+            Button repeatButton = (Button) dialog.findViewById(R.id.repeat);
+            TextView tv = (TextView) dialog.findViewById(R.id.textView);
+            tv.setText("Leider noch nicht ganz richtig.\n\n" + "Lösung: " + getAnswer());
+            repeatButton.setVisibility(View.GONE);
+            Button showSolutionButton = (Button) dialog.findViewById(R.id.solution);
+            showSolutionButton.setText("Ok");
+            showSolutionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showSolution();
+                    doNotCheckAnswer = true;
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+        else{
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+
+            dialog.setContentView(R.layout.activity_custom_dialog);
+
+            Button repeatButton = (Button) dialog.findViewById(R.id.repeat);
+            repeatButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    repeatVocab();
+                    dialog.dismiss();
+                }
+            });
+            Button showSolutionButton = (Button) dialog.findViewById(R.id.solution);
+            showSolutionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showSolution();
+                    doNotCheckAnswer = true;
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +123,7 @@ public class askVocabs extends AppCompatActivity {
             startActivity(intent);
         }
         answerEditText.setText("");
+        nextButton.setText("Prüfen");
 
     }
 
@@ -83,35 +137,57 @@ public class askVocabs extends AppCompatActivity {
         }
         char firstChar = getAnswer().charAt(0);
         if (Character.isUpperCase(firstChar)){
-            answerEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+            answerEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         }
         else{
             answerEditText.setInputType(InputType.TYPE_CLASS_TEXT);
         }
         subHeadlineText.setText("Lektion " + Integer.toString(vocab.getLection()));
+        if(currVocab.getPicture() != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(currVocab.getPicture(), 0, currVocab.getPicture().length);
+            vocabPictureImageView.setImageBitmap(bitmap);
+            vocabPictureImageView.setVisibility(View.VISIBLE);
+        }
+        else{
+            vocabPictureImageView.setVisibility(View.GONE);
+        }
 
     }
 
     private void findElements() {
-        questionTextView = (TextView) findViewById(R.id.question);
+        questionTextView = (TextView) findViewById(R.id.text2);
         answerEditText = (EditText) findViewById(R.id.answer);
         subHeadlineText = (TextView) findViewById(R.id.subHeadLine);
         headlineText = (TextView) findViewById(R.id.headline);
         nextButton = (Button) findViewById(R.id.next);
         bubbleTextView = (TextView) findViewById(R.id.bubbleTextAsk);
-
+        skipButton = (Button) findViewById(R.id.skip);
+        vocabPictureImageView = (ImageView) findViewById(R.id.vocabImage);
     }
 
     private void getCurrentLection() {
         Bundle bundle = getIntent().getExtras();
         lectionDatabaseHelper = lectionDatabaseHelper.getInstance(this);
+
         currentLection = lectionDatabaseHelper.get(bundle.getLong("selectedLection") + 1l);
         vocabDatabaseHelper = vocabDatabaseHelper.getInstance(this);
         if(bundle.getBoolean(ASKWRONGVOCABSAGAIN)){
             vocabList = AskingSingleton.wrongVocabs;
         }
         else{
-            vocabList = vocabDatabaseHelper.getFromLection(currentLection.getNumber());
+            if(bundle.getBoolean("isMultipleLection")){
+                List<Integer> indices = AskingSingleton.selectedLections;
+                vocabList = vocabDatabaseHelper.getFromMultipleLection(indices);
+                subHeadlineText.setVisibility(View.INVISIBLE);
+                headlineText.setText("Vokabeltest");
+                skipButton.setVisibility(View.INVISIBLE);
+
+            }
+            else{
+                vocabList = vocabDatabaseHelper.getFromLection(currentLection.getNumber());
+                headlineText.setText(Helper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            }
+
         }
 
         vocabIterator = vocabList.listIterator(0);
@@ -120,7 +196,7 @@ public class askVocabs extends AppCompatActivity {
         }
         currentDirection = bundle.getLong("selectedDirection");
 
-        headlineText.setText(Helper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+
     }
 
     public void onClickButtonNext(View v) {
@@ -140,36 +216,11 @@ public class askVocabs extends AppCompatActivity {
         }
     }
 
-    private void vocabIsFalse() {
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
-
-        dialog.setContentView(R.layout.activity_custom_dialog);
-
-        Button repeatButton = (Button) dialog.findViewById(R.id.repeat);
-        repeatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                repeatVocab();
-                dialog.dismiss();
-            }
-        });
-        Button showSolutionButton = (Button) dialog.findViewById(R.id.solution);
-        showSolutionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSolution();
-                doNotCheckAnswer = true;
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
     private void showSolution() {
         answerEditText.setText(getAnswer());
         answerEditText.setEnabled(false);
         AskingSingleton.wrongVocabs.add(currVocab);
+        nextButton.setText("Nächste");
     }
 
     private void repeatVocab() {
@@ -220,21 +271,24 @@ public class askVocabs extends AppCompatActivity {
     }
 
     private String getPositiveFeedbackText() {
-        return("Gut gemacht!");
+        String[] appreciation = new String[]{"Gut gemacht!", "Sehr gut!", "Weiter so!", "Du wirst immer besser!"};
+        return(appreciation[new Random().nextInt(appreciation.length)]);
     }
 
     private String getAnswer() {
         if(currentDirection == 1l){
-            return(currVocab.getGerman());
+            return(currVocab.getGerman().trim());
         }
         else{
-            return(currVocab.getForeign());
+            return(currVocab.getForeign().trim());
         }
     }
 
     public void onClickBurgerMenu(View v){
         final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
+        finish();
     }
 
     public void onClickButtonSkip(View v){

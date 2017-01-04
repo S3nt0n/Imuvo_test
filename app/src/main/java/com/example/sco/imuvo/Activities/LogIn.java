@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.sco.imuvo.HelperClasses.InitData;
+import com.example.sco.imuvo.HelperClasses.TypefaceUtil;
 import com.example.sco.imuvo.HelperClasses.UserDatabaseHelper;
 import com.example.sco.imuvo.HelperClasses.Helper;
 import com.example.sco.imuvo.Model.SingletonUser;
@@ -35,6 +36,7 @@ public class LogIn extends AppCompatActivity {
     public UserDatabaseHelper userDatabaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -60,6 +62,7 @@ public class LogIn extends AppCompatActivity {
             }
         }
         super.onCreate(savedInstanceState);
+        TypefaceUtil.overrideFont(this,"SERIF","fonts");
         setContentView(R.layout.activity_log_in);
         getElements();
         testFunction();

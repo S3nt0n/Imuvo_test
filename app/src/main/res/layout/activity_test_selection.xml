@@ -87,7 +87,7 @@
                     android:layout_weight="1"
                     android:layout_marginRight="40dp"
                     style="@style/menu_button."
-                    android:textColor="@color/colorMenuTextLeft"
+                    android:textColor="@color/colorMenuTextMiddle"
                     android:onClick="onClickStartAsking"/>
 
                 <com.example.sco.imuvo.CustomViews.ButtonJokerman
@@ -97,7 +97,7 @@
                     android:id="@+id/buttonTest"
                     android:layout_weight="1"
                     style="@style/menu_button."
-                    android:textColor="@color/colorMenuTextLeft"
+                    android:textColor="@color/colorMenuTextRight"
                     android:onClick="onClickStartTest"/>
             </LinearLayout>
 

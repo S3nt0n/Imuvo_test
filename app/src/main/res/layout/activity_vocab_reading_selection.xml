@@ -74,6 +74,15 @@
             android:layout_weight="1"
             android:textAlignment="center"/>
 
+
+        <com.example.sco.imuvo.CustomViews.CustomSpinnerMultiSelection
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:background="@drawable/spinnerred"
+            android:id="@+id/lectionSpinnerMultiple" />
+
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="0dp"

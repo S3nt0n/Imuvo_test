@@ -51,6 +51,8 @@ public class MenuImuvo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                Intent intent = new Intent(getApplicationContext(),LogIn.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 finish();
 
             }
@@ -89,26 +91,28 @@ public class MenuImuvo extends AppCompatActivity {
         bubbleTextView.setTextColor(Color.parseColor("#FFFFFF"));
     }
     public void onClickPlay(View v){
-
-        Button t = (Button) v;
-        Toast.makeText(this,t.getText(),Toast.LENGTH_LONG).show();
+        final Intent menuIntent = new Intent(this,play.class);
+        startActivity(menuIntent);
     }
     public void onClickRead(View v){
         final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
         Bundle bundle = new Bundle();
-        bundle.putString("type","read");
+        bundle.putString("type",vocabReadingSelection.READING);
         menuIntent.putExtras(bundle);
         startActivity(menuIntent);
     }
 
     public void onClickVocabs(View v){
-        Button t = (Button) v;
-        Toast.makeText(this,t.getText(),Toast.LENGTH_LONG).show();
+        final Intent menuIntent = new Intent(this,LectionList.class);
+        startActivity(menuIntent);
 
     }
     public void onClickReadAloud(View v){
-        Button t = (Button) v;
-        Toast.makeText(this,t.getText(),Toast.LENGTH_LONG).show();
+        final Intent menuIntent = new Intent(this,vocabReadingSelection.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("type",vocabReadingSelection.READALOUD);
+        menuIntent.putExtras(bundle);
+        startActivity(menuIntent);
 
     }
     public void onClickTest(View v){

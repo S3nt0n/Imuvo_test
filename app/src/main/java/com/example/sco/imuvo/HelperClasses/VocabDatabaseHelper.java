@@ -14,6 +14,7 @@ import com.example.sco.imuvo.Model.Vocab;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sco on 05.12.2016.
@@ -23,9 +24,9 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
     private static final String DB_NAME = "user_imuvo";
     private static final int DB_VERSION = 1;
     private static final String TABLE_NAME = "vocabs_imuvo";
-    private static final String[] USER_COLUMNS = { "_id", "german", "translation", "lection", "speech" };
+    private static final String[] USER_COLUMNS = { "_id", "german", "translation", "lection", "speech", "picture" };
     private static final String USER_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS vocabs_imuvo "
-            + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, lection INTEGER, speech BLOB)";
+            + "(_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, german TEXT, translation TEXT, lection INTEGER, speech BLOB, picture BLOB)";
     private static final String USER_DROP_Table = "DROP TABLE IF EXISTS vocabs_imuvo";
 
     private String DB_PATH = null;
@@ -76,7 +77,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, "_id = ?",
                 new String[] { String.valueOf(id) }, null, null, null);
         if (cursor.moveToFirst()) {
-            vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4));
+            vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4),cursor.getBlob(5));
         }
         cursor.close();
         return vocab;
@@ -93,8 +94,9 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
 
         if (cursor.moveToFirst()) {
             do {
+                byte[] test = cursor.getBlob(5);
                 Log.i("Vocab",cursor.getString(1));
-                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4));
+                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4),test);
                 vocabs.add(vocab);
             } while (cursor.moveToNext());
 
@@ -126,6 +128,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         values.put("translation",vocab.getForeign());
         values.put("speech",vocab.getSpeech());
         values.put("lection",vocab.getLection());
+        values.put("picture",vocab.getPicture());
         long id = db.insert(TABLE_NAME, null, values);
 
         return id;
@@ -138,6 +141,7 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
         values.put("translation",vocab.getForeign());
         values.put("speech",vocab.getSpeech());
         values.put("lection",vocab.getLection());
+        values.put("picture",vocab.getPicture());
         int rows = db.update(TABLE_NAME, values, "_id = ?", new String[] { String.valueOf(vocab.getSqlID()) });
         return rows;
     }
@@ -171,4 +175,43 @@ public class VocabDatabaseHelper extends SQLiteOpenHelper{
     }
 
 
+    public ArrayList<Vocab> getFromMultipleLection(List<Integer> indices) {
+        open();
+        ArrayList<Vocab> vocabs = new ArrayList<Vocab>();
+        Vocab vocab = null;
+        //Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME,null);
+        String selectionStatement = "lection in (";
+        String[] args = new String[indices.size()];
+        Integer counter = 0;
+        for (Integer i:
+             indices) {
+
+            args[counter] = String.valueOf(i + 1);
+            counter++;
+        }
+        for (String s:
+             args) {
+            if (s != null){
+                selectionStatement += s +",";
+            }
+
+
+        }
+        selectionStatement = selectionStatement.substring(0,selectionStatement.length()-1);
+        selectionStatement += ")";
+        Cursor cursor = db.query(TABLE_NAME, USER_COLUMNS, selectionStatement,
+                null, null, null, null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                Log.i("Vocab",cursor.getString(1));
+                vocab = new Vocab(cursor.getLong(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),cursor.getBlob(4),cursor.getBlob(5));
+                vocabs.add(vocab);
+            } while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        return vocabs;
+    }
 }

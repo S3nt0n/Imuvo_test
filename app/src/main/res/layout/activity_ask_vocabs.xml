@@ -29,7 +29,8 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/headline"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        android:textColor="@color/colorMenuTextLeft" />
 
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
         android:text="Lektion X"
@@ -52,7 +53,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/question"
+        android:layout_toEndOf="@+id/text2"
         android:layout_alignBottom="@+id/imageView6" />
     <LinearLayout
         android:orientation="vertical"
@@ -67,22 +68,42 @@
         android:paddingTop="20dp"
         android:paddingBottom="20dp">
 
-        <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
-        android:layout_width="@dimen/width_vocabs_rectangles"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/question"
-        android:background="@drawable/rectangleroundedvocabs"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:layout_alignTop="@+id/imageView5"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginBottom="11dp"
-        android:layout_above="@+id/answer" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginBottom="11dp">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="75dp"
+                app:srcCompat="@drawable/animal"
+                android:id="@+id/vocabImage"
+                android:layout_alignRight="@+id/text2"
+                android:layout_alignEnd="@+id/text2"
+                android:adjustViewBounds="true"
+                android:cropToPadding="false"
+                android:scaleType="fitCenter"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"/>
+
+            <com.example.sco.imuvo.CustomViews.TextViewITCKRIST
+            android:layout_width="240dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/text2"
+            android:background="@drawable/rectangleroundedvocabs"
+            android:gravity="center"
+            android:textSize="20sp"
+                android:layout_gravity="center"
+
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
         <com.example.sco.imuvo.CustomViews.EditTextITCKRIST
-            android:layout_width="@dimen/width_vocabs_rectangles"
+            android:layout_width="240dp"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/answer"
@@ -91,8 +112,8 @@
             android:background="@drawable/rectangleroundedvocabs"
             android:layout_alignBottom="@+id/imageView5"
             android:layout_gravity="center_horizontal"
-            android:layout_alignLeft="@+id/question"
-            android:layout_alignStart="@+id/question"
+            android:layout_alignLeft="@+id/text2"
+            android:layout_alignStart="@+id/text2"
             android:textSize="20sp"
             android:imeOptions="actionDone"
             android:maxLines="1"
@@ -108,20 +129,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="onClickBurgerMenu"/>
-
-    <com.example.sco.imuvo.CustomViews.ButtonJokerman
-        android:layout_width="150dp"
-        android:id="@+id/previous"
-        android:onClick="onClickButtonSkip"
-        android:background="@drawable/skip_button"
-        android:textAlignment="center"
-
-        android:paddingLeft="10dp"
-        android:text="Überspringen"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <com.example.sco.imuvo.CustomViews.ButtonJokerman
         android:text="Prüfen"
@@ -149,6 +156,20 @@
         android:visibility="invisible"
         android:textColor="#FFFFFF"
         />
+
+    <com.example.sco.imuvo.CustomViews.ButtonJokerman
+        android:layout_width="150dp"
+        android:id="@+id/skip"
+        android:onClick="onClickButtonSkip"
+        android:background="@drawable/skip_button"
+        android:textAlignment="center"
+
+        android:paddingLeft="10dp"
+        android:text="Überspringen"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -30,12 +30,15 @@
         <activity
             android:name=".Activities.vocabReadingSelection"
             android:screenOrientation="nosensor" />
-        <activity android:name=".Activities.readVocabs"
-            android:screenOrientation="nosensor"/>
-        <activity android:name=".Activities.VocabList"
-            android:screenOrientation="nosensor"/>
-        <activity android:name=".Activities.askVocabs"
-            android:screenOrientation="nosensor"/>
+        <activity
+            android:name=".Activities.readVocabs"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".Activities.VocabList"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".Activities.askVocabs"
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".Activities.LectionList"
             android:screenOrientation="nosensor" />
@@ -45,6 +48,7 @@
         <activity
             android:name=".Activities.resultAfterAsking"
             android:screenOrientation="nosensor" />
+        <activity android:name=".Activities.play"></activity>
     </application>
 
 </manifest>
