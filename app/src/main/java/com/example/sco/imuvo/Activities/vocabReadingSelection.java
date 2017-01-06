@@ -78,11 +78,11 @@ public class vocabReadingSelection extends AppCompatActivity {
         }
         else if(nextIntentType.contentEquals(TEST)){
             speechbubble.setText("Du möchtest Vokabeln mit einem Vokabeltest üben. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Üben beginnst.");
-            headline.setText(Helper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            headline.setText(Helper.colorsString(this,"Vokabeln testen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
         else if(nextIntentType.contentEquals(READALOUD)){
             speechbubble.setText("Du möchtest Dir Vokabeln anhören. Unter der Sprechlase hast Du verschiedene Einstellmöglichkeiten bevor du mit dem Vorlesen beginnst.");
-            headline.setText(Helper.colorsString(this,"Vokabeln abfragen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+            headline.setText(Helper.colorsString(this,"Vokabeln vorlesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
         }
     }
 
@@ -131,6 +131,7 @@ public class vocabReadingSelection extends AppCompatActivity {
             }
         });
         multipleLectionSpinner.setItems(lables);
+        AskingSingleton.selectedLections = multipleLectionSpinner.getSelectedIndices();
     }
 
     private void loadDirectionSpinnerData() {

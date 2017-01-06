@@ -139,7 +139,13 @@ public class readVocabs extends AppCompatActivity {
         }
         vocabIterator = vocabList.listIterator(0);
         currentDirection = bundle.getLong("selectedDirection");
-        headlineText.setText(Helper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+        if(nextIntentType.contentEquals("read")){
+            headlineText.setText(Helper.colorsString(this,"Vokabeln lesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+        }
+        else{
+            headlineText.setText(Helper.colorsString(this,"Vokabeln vorlesen", ContextCompat.getColor(this, R.color.colorMenuTextLeft),ContextCompat.getColor(this, R.color.colorMenuTextMiddle)));
+        }
+
     }
 
     public void onClickButtonNext(View v) {

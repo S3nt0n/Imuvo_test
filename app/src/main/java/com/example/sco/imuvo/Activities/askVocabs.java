@@ -122,8 +122,10 @@ public class askVocabs extends AppCompatActivity {
             final Intent intent = new Intent(this,resultAfterAsking.class);
             startActivity(intent);
         }
+        answerEditText.setEnabled(true);
         answerEditText.setText("");
         nextButton.setText("Prüfen");
+
 
     }
 

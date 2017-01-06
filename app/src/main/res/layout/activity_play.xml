@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.sco.imuvo.Activities.play">
     <com.example.sco.imuvo.CustomViews.TextViewJokerman
-        android:text="Vokabeln lesen"
+        android:text="Spielen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -41,7 +41,7 @@
 
     <ImageView
         android:layout_width="500dp"
-        app:srcCompat="@drawable/animal"
+        app:srcCompat="@drawable/salad"
         android:layout_below="@+id/BurgerMenu"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

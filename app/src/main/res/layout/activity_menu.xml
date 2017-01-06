@@ -95,7 +95,7 @@
             android:textColor="@color/colorMenuTextLeft" />
 
         <com.example.sco.imuvo.CustomViews.ButtonJokerman
-            android:text="Test"
+            android:text="Abfrage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

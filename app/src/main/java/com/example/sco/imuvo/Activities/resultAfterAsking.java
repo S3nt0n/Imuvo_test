@@ -95,7 +95,9 @@ public class resultAfterAsking extends AppCompatActivity {
 
     public void onClickButtonOverview(View v){
         final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
+        finish();
     }
 
     public void onClickShowWrongVocabs(View v){

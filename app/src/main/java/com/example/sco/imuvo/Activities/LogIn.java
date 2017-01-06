@@ -65,7 +65,7 @@ public class LogIn extends AppCompatActivity {
         TypefaceUtil.overrideFont(this,"SERIF","fonts");
         setContentView(R.layout.activity_log_in);
         getElements();
-        testFunction();
+        //testFunction();
         setInitData();
         initSQLData(this);
 
