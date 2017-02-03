@@ -49,7 +49,7 @@ public class CreateUserActivity extends AppCompatActivity {
     }
 
     public void onClickBurgerMenu(View v){
-        final Intent menuIntent = new Intent(this,MenuImuvo.class);
+        final Intent menuIntent = new Intent(this,LogIn.class);
         menuIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menuIntent);
         finish();
